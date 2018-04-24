@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Benim Sayfam</title>
+	<style type="text/css">
+		.header
+		{
+			padding: 10px;
+			text-align: center;
+			background:  #009933;
+			color: white;
+		}
+		.header h1
+		{
+			font-size: 40px;
+		}
+		.navbar
+		{
+			
+			background-color: #333
+
+		}
+		.navbar a
+		{
+			color:white;
+			text-align: center;
+			padding: 14px 20px;
+			text-decoration: none; /*alt çizgiyi silmek için*/
+			font-size: 160%;
+		}
+		.main
+		{
+			
+			background-color: #f1f1f1;
+			padding: 20px;
+			border-style: solid;
+		}
+		.kod
+		{
+			background-color: #333333;
+			color: #e6e6e6;
+			font-size: 120%;
+		}
+		span
+		{
+			color:#cc0000;
+			font-style: italic;
+		}
+		
+		.footer {
+    		padding: 20px; /* Some padding */
+    		text-align: center; /* Center text*/
+    		background: #ddd; /* Grey background */
+		}
+		p
+		{
+			font-size: 120%;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<img style="height: 100px;width: 100px;" src="images/icons/a.png">
+		<p>WELCOME</p>
+	</div>
+	<div class="navbar">
+		<a href="anasayfa.html">Home</a>
+		<a href="hakkımda.html">About Me</a>
+		<a href="iletisim.html">Contact</a>
+	</div>
+	<div class="main">
+		<h2 style="font-size: 150%;">Python İle Web Scraping Örneği 1</h2>
+		<h4>12.02.2018</h4>
+		<h3>I am sharing a simple web scraping example code with Python 3.6 ..</h3>
+		<img src="images/ilk.jpg" height="700" width="1405">
+		<p>First we add the following modules to my project file.</p>
+		<div class="kod">
+			<pre style="color: #ffbf00;">
+				<ul>
+					<li>import requests</li>
+					<li>from bs4 import BeautifulSoup</li>
+					<li>import os</li>
+					<li>import sys</li>
+					<li>import urllib.request</li>
+					<li>import random</li>
+				</ul>
+
+			</pre>
+		</div>
+		<p>And I continue with our first method.</p>
+		<div class="kod">
+			<pre><strong style="color: #ffbf00;">
+def anasayfadaki_linkler(sayfa_numarası):</strong>
+	#ilk sayfadaki siteleri getitiyor
+	url = "http://nazarca.com/page"+str(sayfa_numarası)
+	response = requests.get(url)
+	içerik = response.content
+	soup = BeautifulSoup(içerik,"html.parser")
+	linkler = []
+	for link in soup.find_all("div",{"class":"mh-loop-thumb"},"a"):
+    	#print(link.a.get("href"))
+    	linkler.append(link.a.get("href"))
+	return linkler
+			</pre>
+		</div>
+		<p>This method creates the url of that page according to the page number it gets.First, we have a request from the page using the <span>get ()</span> method, and we now have a <span>Response</span> object.Then we get the <span>contents</span> of the <span>contents</span> object.</p>
+		<p>After all, we are parsing the content using the <span>BeautifulSoup ()</span> module, which is used to handle HTML and XML files. And we apply the <span>find_all</span> method to the <span>soup</span> object we are parsing and we take the links with class a name, <b>mh-loop-tumb</b> with <b>a</b> tag and we add them to our <span>link []</span> array with the <span>append ()</span> method.</p>
+		<p>Bu örneğimiz ile web sitesinden ilk olarak içeriklerin linklerini çekip; bu linkleri bir dizi elemanına eklemeyi öğrendik.</p>
+		<h5 style="font-size: 170%;">In our next examples, we will learn how to draw content titles, video links, images, and content in the web site.</h5>
+		<h5 style="font-size: 170%;"">Then we will learn how to delete and edit unnecessary concepts in text documents created by adding the <span>OS</span> module to the folder and adding additional data.</h5>
+	</div>
+	<div class="footer">2018
+
+	<center>
+			<address>
+				Written By <a href="mailto:meteerogl@gmail.com">Mete Eroğlu</a>.<br>
+				Visit us at:<br>
+				<a href="https://github.com/meteerogl">site</a><br>
+				Kavacık Subayevleri<br>
+				Keçiören ANKARA
+			</address>
+		</center>
+	</div>
+	
+	
+</body>
+</html>
